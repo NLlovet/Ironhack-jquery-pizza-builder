@@ -16,7 +16,7 @@ $(document).ready(function() {
         pepperonni: true,
         mushrooms: true,
         greenPeppers: true,
-        whiteSauce: false,
+        whiteSauce: true,
         glutenFreeCrust: true,
       }
 
@@ -28,18 +28,18 @@ $(document).ready(function() {
         renderPrice()
     }
 
-
+    renderPrice();
     //turns on and off the buttons for the classes
     $(".btn-pepperonni").click(function() {
         $(".pep").toggle();
         state.pepperonni = !state.pepperonni;
         if(state.pepperonni){
             basePrice++;
-
         }
         else{
             basePrice--;
         }
+        $("#pep").toggle();
     });
 
     $(".btn-mushrooms").click(function() {
@@ -51,6 +51,8 @@ $(document).ready(function() {
         else {
             basePrice--;
         }
+
+        $("#mush").toggle();
     });
 
     $(".btn-green-peppers").click(function() {
@@ -58,12 +60,14 @@ $(document).ready(function() {
         state.greenPeppers = !state.greenPeppers;
         if(state.greenPeppers){
             basePrice++;
-
+            
         }
         
         else {
             basePrice--;
         }
+
+        $("#green").toggle();
 
     });
 
@@ -78,18 +82,22 @@ $(document).ready(function() {
             basePrice -= 3;
         }
 
+        $("#white").toggle();
+
     });
 
     $(".btn-crust").click(function() {
             $(".crust").toggleClass('crust-gluten-free');
             state.glutenFreeCrust = !state.glutenFreeCrust;
             if(state.glutenFreeCrust){
-                basePrice += 5;
+                basePrice -= 5;
             }
             
-        else {
-            basePrice -= 5;
-        }
+            else {
+                basePrice += 5;
+            }
+
+            $("#crust").toggle();
         });
 
 
@@ -108,17 +116,19 @@ $(document).ready(function() {
             let states = Object.keys(state)
         
             if (state[states[index]]) {
-              button.classList.remove("active");
+              button.classList.add("active");
             }
             else {
-              button.classList.add("active");
+              button.classList.remove("active");
             }
           })
     }
 
     function renderPrice(){
-        $("strong").html(`<strong> $${basePrice}`);
-    }
+    console.log("working")
+    $("strong").html(`<strong> $${basePrice}`);
 
+    
+}
 
 })
